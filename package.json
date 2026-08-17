@@ -1,0 +1,18 @@
+{
+  "name": "meu-imovel-pe",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CRM Imobiliário Profissional",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  }
+}
