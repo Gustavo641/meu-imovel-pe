@@ -3,3 +3,4 @@
   "outputDirectory": "packages/web/dist",
   "framework": "vite"
 }
+// Vercel config for monorepo - updated Tue Aug 18 13:08:41     2026
