@@ -6,6 +6,7 @@ import { LoginForm } from './components/LoginForm';
 import { Dashboard } from './pages/Dashboard';
 import { Leads } from './pages/Leads';
 import { Calendar } from './pages/Calendar';
+import { Funnel } from './pages/Funnel';
 import './styles/globals.css';
 
 const queryClient = new QueryClient();
@@ -72,6 +73,11 @@ function AppContent() {
               onClick={() => setActive('leads')}
             />
             <NavLink
+              label="Funil de Vendas"
+              active={active === 'funnel'}
+              onClick={() => setActive('funnel')}
+            />
+            <NavLink
               label="Agenda"
               active={active === 'calendar'}
               onClick={() => setActive('calendar')}
@@ -83,6 +89,7 @@ function AppContent() {
         <main className="md:col-span-3">
           {active === 'dashboard' && <Dashboard />}
           {active === 'leads' && <Leads />}
+          {active === 'funnel' && <Funnel />}
           {active === 'calendar' && <Calendar />}
         </main>
       </div>
