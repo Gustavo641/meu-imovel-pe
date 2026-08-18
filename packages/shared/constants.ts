@@ -77,6 +77,5 @@ export const APP_CONFIG = {
 
 // URLs e endpoints (será atualizado com variáveis de ambiente)
 export const ENDPOINTS = {
-  SUPABASE_URL: process.env.REACT_APP_SUPABASE_URL || '',
-  SUPABASE_ANON_KEY: process.env.REACT_APP_SUPABASE_ANON_KEY || '',
+  // Endpoints serão carregados via import.meta.env no serviço do Supabase
 };
