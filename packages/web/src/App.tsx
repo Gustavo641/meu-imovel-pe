@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { useAuthStore } from './hooks/useAuth';
 import { LoginForm } from './components/LoginForm';
+import { SignupForm } from './components/SignupForm';
+import { ForgotPasswordForm } from './components/ForgotPasswordForm';
 import { Dashboard } from './pages/Dashboard';
 import { Leads } from './pages/Leads';
 import { Calendar } from './pages/Calendar';
@@ -11,12 +13,15 @@ import './styles/globals.css';
 
 const queryClient = new QueryClient();
 
+type AuthScreen = 'login' | 'signup' | 'forgot-password';
+
 function AppContent() {
   const user = useAuthStore((state) => state.user);
   const loading = useAuthStore((state) => state.loading);
   const initAuth = useAuthStore((state) => state.initAuth);
   const signOut = useAuthStore((state) => state.signOut);
   const [active, setActive] = useState('dashboard');
+  const [authScreen, setAuthScreen] = useState<AuthScreen>('login');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +35,23 @@ function AppContent() {
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <LoginForm />
+        {authScreen === 'login' && (
+          <LoginForm
+            onSwitchToSignup={() => setAuthScreen('signup')}
+            onSwitchToForgotPassword={() => setAuthScreen('forgot-password')}
+          />
+        )}
+        {authScreen === 'signup' && (
+          <SignupForm
+            onSignupSuccess={() => setAuthScreen('login')}
+            onSwitchToLogin={() => setAuthScreen('login')}
+          />
+        )}
+        {authScreen === 'forgot-password' && (
+          <ForgotPasswordForm
+            onSwitchToLogin={() => setAuthScreen('login')}
+          />
+        )}
       </div>
     );
   }
