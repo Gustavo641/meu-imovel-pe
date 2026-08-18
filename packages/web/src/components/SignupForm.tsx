@@ -53,14 +53,14 @@ export function SignupForm({ onSignupSuccess, onSwitchToLogin }: SignupFormProps
 
   if (success) {
     return (
-      <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow">
+      <div className="w-full max-w-md mx-auto p-8 bg-card rounded-2xl shadow-elevated border border-border">
         <div className="text-center">
-          <div className="text-5xl mb-4">✅</div>
-          <h2 className="text-xl font-bold mb-2">Cadastro Realizado!</h2>
-          <p className="text-gray-600 mb-4">
+          <div className="text-6xl mb-4">✅</div>
+          <h2 className="text-2xl font-display font-bold mb-2 text-foreground">Cadastro Realizado!</h2>
+          <p className="text-muted-foreground mb-4">
             Verifique seu email para confirmar sua conta.
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted-foreground">
             Redirecionando em alguns segundos...
           </p>
         </div>
@@ -69,30 +69,33 @@ export function SignupForm({ onSignupSuccess, onSwitchToLogin }: SignupFormProps
   }
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow">
-      <h1 className="text-2xl font-bold mb-6">Criar Conta</h1>
+    <div className="w-full max-w-md mx-auto p-8 bg-card rounded-2xl shadow-elevated border border-border">
+      <h1 className="text-3xl font-display font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">
+        Criar Conta
+      </h1>
+      <p className="text-muted-foreground text-sm mb-6">Junte-se a LUNA CRM</p>
 
       {error && (
-        <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-4 p-4 bg-destructive bg-opacity-10 border border-destructive rounded-lg text-destructive text-sm">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Nome Completo</label>
+          <label className="label-base mb-2">Nome Completo</label>
           <input
             {...register('name', { required: 'Nome é obrigatório' })}
             type="text"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="input-base"
             placeholder="Seu nome"
             disabled={isLoading}
           />
-          {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
+          {errors.name && <span className="text-destructive text-sm mt-1 block">{errors.name.message}</span>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
+          <label className="label-base mb-2">Email</label>
           <input
             {...register('email', {
               required: 'Email é obrigatório',
@@ -102,15 +105,15 @@ export function SignupForm({ onSignupSuccess, onSwitchToLogin }: SignupFormProps
               }
             })}
             type="email"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="input-base"
             placeholder="seu@email.com"
             disabled={isLoading}
           />
-          {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+          {errors.email && <span className="text-destructive text-sm mt-1 block">{errors.email.message}</span>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Senha</label>
+          <label className="label-base mb-2">Senha</label>
           <input
             {...register('password', {
               required: 'Senha é obrigatória',
@@ -120,43 +123,43 @@ export function SignupForm({ onSignupSuccess, onSwitchToLogin }: SignupFormProps
               }
             })}
             type="password"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="input-base"
             placeholder="Mínimo 6 caracteres"
             disabled={isLoading}
           />
-          {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+          {errors.password && <span className="text-destructive text-sm mt-1 block">{errors.password.message}</span>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Confirmar Senha</label>
+          <label className="label-base mb-2">Confirmar Senha</label>
           <input
             {...register('confirmPassword', {
               required: 'Confirmação é obrigatória',
               validate: (value) => value === password || 'As senhas não conferem'
             })}
             type="password"
-            className="w-full px-3 py-2 border border-gray-300 rounded"
+            className="input-base"
             placeholder="Repita a senha"
             disabled={isLoading}
           />
-          {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
+          {errors.confirmPassword && <span className="text-destructive text-sm mt-1 block">{errors.confirmPassword.message}</span>}
         </div>
 
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50 font-medium"
+          className="w-full btn-primary py-2 rounded-lg font-medium disabled:opacity-50"
         >
           {isLoading ? 'Criando conta...' : 'Criar Conta'}
         </button>
       </form>
 
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-muted-foreground">
           Já tem conta?{' '}
           <button
             onClick={onSwitchToLogin}
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="text-primary hover:text-primary-glow font-medium transition-colors"
           >
             Entrar
           </button>

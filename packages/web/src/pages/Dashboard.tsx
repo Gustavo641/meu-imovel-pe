@@ -1,82 +1,140 @@
-import { useLeads } from '../hooks/useLeads';
-import { LeadsList } from '../components/LeadsList';
-import { LEAD_STATUS_CONFIG } from '@meu-imovel-pe/shared';
-import type { LeadStatus } from '@meu-imovel-pe/shared';
+import { DateTime } from '../components/DateTime';
+import { ProtectedRoute } from '../components/ProtectedRoute';
+import { useLeadStats } from '../hooks/useLeadStats';
+import { usePermissionStore } from '../hooks/usePermissions';
 
 export function Dashboard() {
-  const { data: leads = [] } = useLeads();
+  const stats = useLeadStats();
+  const role = usePermissionStore((s) => s.role);
+  const canExportRevenue = usePermissionStore((s) => s.permissions.some((p) => p.resource === 'dashboard' && p.action === 'export'));
 
-  const stats = {
-    total: leads.length,
-    novo_lead: leads.filter((l) => l.status === 'novo_lead').length,
-    qualificado: leads.filter((l) => l.status === 'qualificado').length,
-    em_atendimento: leads.filter((l) => l.status === 'em_atendimento').length,
-    venda_concluida: leads.filter((l) => l.status === 'venda_concluida').length,
-  };
+  if (!stats) {
+    return (
+      <ProtectedRoute resource="dashboard" action="view">
+        <div className="text-center py-12 text-muted-foreground">Carregando dados...</div>
+      </ProtectedRoute>
+    );
+  }
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+    <ProtectedRoute resource="dashboard" action="view">
+      <div className="space-y-8">
+        <div>
+          <h1 className="text-4xl font-display font-bold text-foreground mb-2">Dashboard</h1>
+          <DateTime />
+        </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <StatCard label="Total de Leads" value={stats.total} />
-        <StatCard label="Novos" value={stats.novo_lead} />
-        <StatCard label="Qualificados" value={stats.qualificado} />
-        <StatCard label="Em Atendimento" value={stats.em_atendimento} />
-        <StatCard label="Vendas" value={stats.venda_concluida} color="#10B981" />
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <StatCard label="Total de Leads" value={stats.totalLeads} subtext="em gestão" icon="📊" />
+          <StatCard label="Leads Quentes" value={stats.hotLeads} subtext="negociação ativa" icon="🔥" color="destructive" />
+          <StatCard label="Leads Mornos" value={stats.warmLeads} subtext="contato feito" icon="🌤️" color="warning" />
+          <StatCard label="Vendas Fechadas" value={stats.closedDeals} subtext="negócio ganho" icon="✅" color="success" />
+        </div>
 
-      {/* Sales Funnel */}
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Funil de Vendas</h2>
-        <div className="space-y-3">
-          {(['novo_lead', 'primeiro_contato', 'qualificado', 'em_atendimento', 'visita_agendada', 'proposta', 'negociacao', 'venda_concluida'] as LeadStatus[]).map((status) => {
-            const count = leads.filter((l) => l.status === status).length;
-            const percentage = leads.length > 0 ? (count / leads.length) * 100 : 0;
+        {role === 'CEO' && (
+          <div className="bg-card border border-border rounded-2xl p-6">
+            <div className="flex justify-between items-center">
+              <div>
+                <h2 className="text-lg font-display font-semibold text-foreground mb-2">Receita Mensal</h2>
+                <p className="text-4xl font-bold text-success">R$ {stats.monthlyRevenue.toLocaleString('pt-BR')}</p>
+              </div>
+              {canExportRevenue && <button className="px-4 py-2 btn-primary rounded-lg text-sm">Exportar</button>}
+            </div>
+          </div>
+        )}
 
-            return (
-              <div key={status}>
-                <div className="flex justify-between mb-1">
-                  <span className="font-medium">{LEAD_STATUS_CONFIG[status].label}</span>
-                  <span className="text-sm text-gray-600">{count} leads</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="h-2 rounded-full transition-all"
-                    style={{
-                      width: `${percentage}%`,
-                      backgroundColor: LEAD_STATUS_CONFIG[status].color,
-                    }}
-                  />
+        <div className="bg-card border border-border rounded-2xl p-6">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-4">Prospecção por Canal</h2>
+          <div className="space-y-3">
+            {Object.entries(stats.prospectionByChannel).map(([channel, count]) => (
+              <div key={channel} className="flex items-center justify-between">
+                <span className="capitalize text-foreground">{channel}</span>
+                <div className="flex items-center gap-3 flex-1 justify-end">
+                  <div className="w-32 bg-muted rounded-full h-2">
+                    <div className="h-2 rounded-full bg-primary transition-all" style={{ width: `${stats.totalLeads > 0 ? (count / stats.totalLeads) * 100 : 0}%` }} />
+                  </div>
+                  <span className="text-foreground font-semibold w-8 text-right">{count}</span>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-card border border-border rounded-2xl p-6">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-4">Taxa de Conversão</h2>
+          <div className="flex items-center gap-6">
+            <div className="text-center">
+              <p className="text-5xl font-bold text-success">{stats.conversionRate.toFixed(1)}%</p>
+              <p className="text-muted-foreground text-sm mt-2">Conversão Geral</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-card border border-border rounded-2xl p-6">
+          <h2 className="text-lg font-display font-semibold text-foreground mb-4">Distribuição por Temperatura</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <TemperatureCard emoji="🔥" label="Quente" count={stats.hotLeads} color="destructive" />
+            <TemperatureCard emoji="🌤️" label="Morno" count={stats.warmLeads} color="warning" />
+            <TemperatureCard emoji="❄️" label="Frio" count={stats.coldLeads} color="info" />
+            <TemperatureCard emoji="✅" label="Fechado" count={stats.closedDeals} color="success" />
+          </div>
         </div>
       </div>
-
-      {/* Recent Leads */}
-      <div>
-        <LeadsList />
-      </div>
-    </div>
+    </ProtectedRoute>
   );
 }
 
 interface StatCardProps {
   label: string;
   value: number;
-  color?: string;
+  subtext: string;
+  icon: string;
+  color?: 'primary' | 'destructive' | 'warning' | 'success' | 'info';
 }
 
-function StatCard({ label, value, color = '#0284C7' }: StatCardProps) {
+function StatCard({ label, value, subtext, icon, color = 'primary' }: StatCardProps) {
+  const colorClasses = {
+    primary: 'text-primary',
+    destructive: 'text-destructive',
+    warning: 'text-warning',
+    success: 'text-success',
+    info: 'text-info'
+  };
+
   return (
-    <div className="p-4 rounded-lg border border-gray-200 hover:shadow-md transition">
-      <p className="text-sm text-gray-600 mb-2">{label}</p>
-      <p className="text-3xl font-bold" style={{ color }}>
-        {value}
-      </p>
+    <div className="bg-surface border border-border rounded-xl p-6 space-y-3 hover-lift">
+      <div className="flex items-start justify-between">
+        <div className="space-y-1">
+          <p className="text-muted-foreground text-sm font-medium">{label}</p>
+          <p className={`text-4xl font-display font-bold ${colorClasses[color]}`}>{value}</p>
+        </div>
+        <span className="text-3xl">{icon}</span>
+      </div>
+      <p className="text-xs text-muted-foreground">{subtext}</p>
+    </div>
+  );
+}
+
+interface TemperatureCardProps {
+  emoji: string;
+  label: string;
+  count: number;
+  color: string;
+}
+
+function TemperatureCard({ emoji, label, count, color }: TemperatureCardProps) {
+  const colorClasses = {
+    destructive: 'bg-destructive bg-opacity-10 border-destructive text-destructive',
+    warning: 'bg-warning bg-opacity-10 border-warning text-warning',
+    info: 'bg-info bg-opacity-10 border-info text-info',
+    success: 'bg-success bg-opacity-10 border-success text-success'
+  };
+
+  return (
+    <div className={`p-4 rounded-lg border ${colorClasses[color as keyof typeof colorClasses]} text-center`}>
+      <p className="text-3xl mb-2">{emoji}</p>
+      <p className="font-semibold text-sm">{label}</p>
+      <p className="text-2xl font-bold mt-2">{count}</p>
     </div>
   );
 }

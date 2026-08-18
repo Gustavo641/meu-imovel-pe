@@ -1,90 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Cores da marca */
+/* LUNA Design System - Tokens CSS */
 :root {
-  --color-background: #F4F6F9;
-  --color-text-primary: #1E293B;
-  --color-brand-primary: #0284C7;
-  --color-action-cta: #F97316;
-  --color-success: #10B981;
-  --color-violet-primary: #955BFE;
-}
+  /* Base & Surfaces */
+  --background: #0E1629;
+  --foreground: #F0F6FC;
+  --surface: #1B273A;
+  --surface-elevated: #243145;
+  --card: #1B273A;
+  --card-foreground: #F0F6FC;
+  --popover: #1B273A;
+  --popover-foreground: #F0F6FC;
+  --muted: #283345;
+  --muted-foreground: #9DA5B1;
+  --border: #283345;
+  --input: #283345;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0F172A;
-    --color-text-primary: #E2E8F0;
-    --color-brand-primary: #0284C7;
-    --color-action-cta: #F97316;
-    --color-success: #10B981;
-  }
+  /* Brand - Violeta Evenyx */
+  --primary: #955BFE;
+  --primary-foreground: #FFFFFF;
+  --primary-glow: #AC79FF;
+  --secondary: #0087F8;
+  --secondary-foreground: #FFFFFF;
+  --accent: #333551;
+  --accent-foreground: #F0F6FC;
+  --ring: #955BFE;
+
+  /* States */
+  --success: #00BE6A;
+  --success-foreground: #0E1629;
+  --warning: #F9BD01;
+  --warning-foreground: #0E1629;
+  --destructive: #F92240;
+  --destructive-foreground: #FFFFFF;
+  --info: #00AEEE;
+  --info-foreground: #FFFFFF;
+
+  /* Charts */
+  --chart-1: #955BFE;
+  --chart-2: #0087F8;
+  --chart-3: #00BE6A;
+  --chart-4: #F9BD01;
+  --chart-5: #F92240;
+
+  /* Sidebar */
+  --sidebar: #131D30;
+  --sidebar-foreground: #E0E5EB;
+  --sidebar-primary: #955BFE;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #262D42;
+  --sidebar-accent-foreground: #E0E5EB;
+  --sidebar-border: #232E40;
+  --sidebar-ring: #955BFE;
 }
 
 * {
-  @apply transition-colors;
+  @apply transition-all duration-200;
 }
 
 html {
-  @apply bg-gray-900 text-white;
+  @apply scroll-smooth;
 }
 
 body {
-  @apply bg-gray-900 text-gray-100;
+  @apply bg-background text-foreground font-sans;
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    @apply bg-gray-50 text-gray-900;
-  }
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-/* Custom components */
-.btn {
-  @apply px-4 py-2 rounded font-medium transition-colors;
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
 }
 
+::-webkit-scrollbar-thumb {
+  @apply bg-muted hover:bg-accent rounded-full transition-colors;
+}
+
+/* Utility classes */
+.glass-card {
+  @apply backdrop-blur-glass bg-gradient-to-br from-surface to-surface-elevated bg-opacity-90 border border-white border-opacity-10;
+}
+
+.hover-lift {
+  @apply transition-all duration-200 hover:shadow-elevated hover:-translate-y-0.5;
+}
+
+.gradient-primary {
+  @apply bg-gradient-primary;
+}
+
+.text-gradient {
+  @apply bg-gradient-text bg-clip-text text-transparent;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display font-bold tracking-tight;
+}
+
+h1 {
+  @apply text-3xl md:text-4xl;
+}
+
+h2 {
+  @apply text-2xl md:text-3xl;
+}
+
+h3 {
+  @apply text-xl md:text-2xl;
+}
+
+h4 {
+  @apply text-lg md:text-xl;
+}
+
+h5, h6 {
+  @apply text-base md:text-lg;
+}
+
+/* Component utilities */
 .btn-primary {
-  @apply bg-blue-600 text-white hover:bg-blue-700;
+  @apply bg-gradient-primary text-primary-foreground hover:shadow-glow transition-all;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+  @apply bg-surface hover:bg-surface-elevated text-foreground;
 }
 
-.btn-danger {
-  @apply bg-red-600 text-white hover:bg-red-700;
+.btn-ghost {
+  @apply bg-transparent hover:bg-surface text-foreground;
 }
 
-.card {
-  @apply bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow;
-}
-
-.input {
-  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
-}
-
-.label {
-  @apply block text-sm font-medium text-gray-700 mb-1;
-}
-
-.badge {
-  @apply inline-block px-3 py-1 rounded-full text-sm font-medium;
+.badge-base {
+  @apply inline-flex items-center px-2 py-1 rounded-sm text-xs font-semibold tracking-wide uppercase;
 }
 
 .badge-success {
-  @apply bg-green-100 text-green-800;
+  @apply badge-base bg-success bg-opacity-15 text-success border border-success border-opacity-30;
 }
 
 .badge-warning {
-  @apply bg-yellow-100 text-yellow-800;
+  @apply badge-base bg-warning bg-opacity-15 text-warning border border-warning border-opacity-30;
 }
 
-.badge-danger {
-  @apply bg-red-100 text-red-800;
+.badge-destructive {
+  @apply badge-base bg-destructive bg-opacity-15 text-destructive border border-destructive border-opacity-30;
 }
 
 .badge-info {
-  @apply bg-blue-100 text-blue-800;
+  @apply badge-base bg-info bg-opacity-15 text-info border border-info border-opacity-30;
+}
+
+.input-base {
+  @apply w-full px-3 py-2 bg-surface border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all;
+}
+
+.label-base {
+  @apply text-sm font-medium text-muted-foreground;
 }

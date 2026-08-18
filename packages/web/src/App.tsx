@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { useAuthStore } from './hooks/useAuth';
 import { LoginForm } from './components/LoginForm';
@@ -29,12 +29,12 @@ function AppContent() {
   }, [initAuth]);
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen">Carregando...</div>;
+    return <div className="flex items-center justify-center h-screen text-foreground">Carregando...</div>;
   }
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-background">
         {authScreen === 'login' && (
           <LoginForm
             onSwitchToSignup={() => setAuthScreen('signup')}
@@ -62,16 +62,18 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+      <header className="bg-surface border-b border-sidebar-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Meu Imóvel.PE</h1>
+          <h1 className="text-2xl font-display font-bold bg-gradient-primary bg-clip-text text-transparent">
+            LUNA CRM
+          </h1>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">{user.email}</span>
+            <span className="text-sm text-muted-foreground">{user.email}</span>
             <button
               onClick={handleSignOut}
-              className="px-4 py-2 text-sm text-red-600 hover:text-red-700"
+              className="px-4 py-2 text-sm text-destructive hover:text-destructive-foreground hover:bg-destructive hover:bg-opacity-10 rounded-md transition-all"
             >
               Sair
             </button>
@@ -82,7 +84,7 @@ function AppContent() {
       <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Sidebar */}
         <aside className="md:col-span-1">
-          <nav className="space-y-2 sticky top-24">
+          <nav className="space-y-2 sticky top-24 bg-sidebar rounded-2xl p-4">
             <NavLink
               label="Dashboard"
               active={active === 'dashboard'}
@@ -128,10 +130,10 @@ function NavLink({ label, active = false, onClick }: NavLinkProps) {
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-4 py-2 rounded-lg transition ${
+      className={`w-full text-left px-4 py-2 rounded-lg transition-all ${
         active
-          ? 'bg-blue-600 text-white'
-          : 'text-gray-700 hover:bg-gray-100'
+          ? 'bg-sidebar-primary text-primary-foreground'
+          : 'text-sidebar-foreground hover:bg-sidebar-accent'
       }`}
     >
       {label}
