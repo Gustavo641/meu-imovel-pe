@@ -24,10 +24,11 @@ export function Kanban({ stages, pipeline }: KanbanProps) {
   const [draggedLead, setDraggedLead] = useState<Lead | null>(null);
 
   const filteredLeads = leads.filter((lead) => {
+    const stage = lead.stage || 'lead';
     if (pipeline === 'comercial') {
-      return ['lead', 'primeiro_contato', 'reuniao', 'novo_evento', 'proposta', 'entrada_operacional', 'comissoes_a_pagar', 'comissoes_pagas'].includes(lead.stage);
+      return ['lead', 'primeiro_contato', 'reuniao', 'novo_evento', 'proposta', 'entrada_operacional', 'comissoes_a_pagar', 'comissoes_pagas'].includes(stage);
     }
-    return lead.stage !== 'comissoes_pagas';
+    return stage !== 'comissoes_pagas';
   });
 
   const handleDragStart = (lead: Lead) => {
@@ -41,7 +42,8 @@ export function Kanban({ stages, pipeline }: KanbanProps) {
 
   const handleDropOnColumn = async (toStage: string) => {
     if (!draggedLead) return;
-    const currentIndex = stages.indexOf(draggedLead.stage);
+    const currentStage = draggedLead.stage || 'lead';
+    const currentIndex = stages.indexOf(currentStage);
     const toIndex = stages.indexOf(toStage);
     if (Math.abs(currentIndex - toIndex) !== 1) {
       alert('Apenas movimentação adjacente permitida');
@@ -55,22 +57,27 @@ export function Kanban({ stages, pipeline }: KanbanProps) {
         .eq('id', draggedLead.id);
 
       if (toStage === 'entrada_operacional' && !draggedLead.is_commission_copy) {
-        await supabase
+        const { error: insertError } = await supabase
           .from('leads')
           .insert({
-            empresa: draggedLead.empresa,
+            nome: draggedLead.name,
+            empresa: draggedLead.empresa || '',
             valor: draggedLead.valor,
             responsavel: draggedLead.responsavel,
             stage: 'comissoes_a_pagar',
             is_commission_copy: true,
             original_lead_id: draggedLead.id,
-            created_by: draggedLead.created_by
+            created_by: draggedLead.created_by,
+            email: draggedLead.email,
+            telefone: draggedLead.phone
           });
+
+        if (insertError) throw insertError;
       }
 
       setDraggedLead(null);
     } catch (error) {
-      console.error('Erro:', error);
+      alert('Erro ao mover lead');
     }
   };
 
@@ -85,7 +92,7 @@ export function Kanban({ stages, pipeline }: KanbanProps) {
             key={stage}
             stage={stage}
             label={STAGE_LABELS[stage]}
-            leads={filteredLeads.filter((l) => l.stage === stage)}
+            leads={filteredLeads.filter((l) => (l.stage || 'lead') === stage)}
             onDragOver={handleDragOver}
             onDrop={() => handleDropOnColumn(stage)}
             onLeadDragStart={handleDragStart}

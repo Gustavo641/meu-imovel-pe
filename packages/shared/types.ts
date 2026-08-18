@@ -43,18 +43,29 @@ export interface Profile {
 // Lead
 export interface Lead {
   id: string;
-  user_id: string;
+  user_id?: string;
   name: string;
   email?: string;
   phone?: string;
-  origin: LeadOrigin;
-  status: LeadStatus;
+  origin?: LeadOrigin;
+  status?: LeadStatus;
   investment_range?: InvestmentRange;
   family_income?: string;
   city?: string;
   neighborhood?: string;
   property_type?: PropertyType;
   notes?: string;
+  // Propriedades adicionais do sistema
+  empresa?: string;
+  responsavel?: string;
+  created_by?: string;
+  stage?: string;
+  valor?: number;
+  temperatura?: 'quente' | 'morno' | 'frio' | 'fechado';
+  is_commission_copy?: boolean;
+  original_lead_id?: string;
+  tags?: string[];
+  prioridade?: 'urgente' | 'alta' | 'media' | 'baixa';
   created_at: string;
   updated_at: string;
 }
