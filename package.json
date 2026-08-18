@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
+    "build": "turbo run build && cp -r packages/web/dist ./dist",
     "lint": "turbo run lint",
     "format": "turbo run format"
   },
