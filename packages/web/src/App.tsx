@@ -11,6 +11,7 @@ import { Calendar } from './pages/Calendar';
 import { Funnel } from './pages/Funnel';
 import { Clientes } from './pages/Clientes';
 import { Agenda } from './pages/Agenda';
+import { Documentos } from './pages/Documentos';
 import './styles/globals.css';
 
 const queryClient = new QueryClient();
@@ -117,6 +118,11 @@ function AppContent() {
               active={active === 'agenda'}
               onClick={() => setActive('agenda')}
             />
+            <NavLink
+              label="Documentos"
+              active={active === 'documentos'}
+              onClick={() => setActive('documentos')}
+            />
           </nav>
         </aside>
 
@@ -128,6 +134,7 @@ function AppContent() {
           {active === 'calendar' && <Calendar />}
           {active === 'clientes' && <Clientes />}
           {active === 'agenda' && <Agenda />}
+          {active === 'documentos' && <Documentos />}
         </main>
       </div>
     </div>
