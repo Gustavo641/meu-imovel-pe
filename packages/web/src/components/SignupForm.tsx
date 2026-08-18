@@ -37,10 +37,9 @@ export function SignupForm({ onSignupSuccess, onSwitchToLogin }: SignupFormProps
       await signUp(data.email, data.password, data.name);
 
       setSuccess(true);
-      await initAuth();
 
       setTimeout(() => {
-        onSignupSuccess?.();
+        onSwitchToLogin?.();
       }, 2000);
     } catch (err) {
       setError(String(err).includes('already registered')
