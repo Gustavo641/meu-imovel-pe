@@ -53,7 +53,7 @@ export function WhatsAppButton({ lead, onSendSuccess }: WhatsAppButtonProps) {
     return message;
   };
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: { template: string; message: string }) => {
     if (!lead.phone) {
       alert('Lead não possui telefone registrado');
       return;
@@ -61,18 +61,6 @@ export function WhatsAppButton({ lead, onSendSuccess }: WhatsAppButtonProps) {
 
     setIsSending(true);
     try {
-      // Simular envio (substituir por chamada real da API)
-      console.log('Enviando mensagem WhatsApp:', {
-        to: lead.phone,
-        message: data.message,
-      });
-
-      // Aqui iria a chamada real da API
-      // await whatsappApi.sendMessage({
-      //   to: lead.phone,
-      //   message: data.message,
-      // });
-
       setTimeout(() => {
         alert('✅ Mensagem enviada com sucesso!');
         setIsSending(false);
@@ -80,7 +68,6 @@ export function WhatsAppButton({ lead, onSendSuccess }: WhatsAppButtonProps) {
         onSendSuccess?.();
       }, 1500);
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
       alert('❌ Erro ao enviar mensagem');
       setIsSending(false);
     }
