@@ -12,6 +12,7 @@ import { Funnel } from './pages/Funnel';
 import { Clientes } from './pages/Clientes';
 import { Agenda } from './pages/Agenda';
 import { Documentos } from './pages/Documentos';
+import { Admin } from './pages/Admin';
 import './styles/globals.css';
 
 const queryClient = new QueryClient();
@@ -123,6 +124,12 @@ function AppContent() {
               active={active === 'documentos'}
               onClick={() => setActive('documentos')}
             />
+            <hr className="my-2 border-sidebar-border" />
+            <NavLink
+              label="⚙️ Admin"
+              active={active === 'admin'}
+              onClick={() => setActive('admin')}
+            />
           </nav>
         </aside>
 
@@ -135,6 +142,7 @@ function AppContent() {
           {active === 'clientes' && <Clientes />}
           {active === 'agenda' && <Agenda />}
           {active === 'documentos' && <Documentos />}
+          {active === 'admin' && <Admin />}
         </main>
       </div>
     </div>
