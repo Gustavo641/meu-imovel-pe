@@ -35,39 +35,39 @@ export function LoginForm({ onSwitchToSignup, onSwitchToForgotPassword }: LoginF
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow">
-      <h1 className="text-2xl font-bold mb-2">Meu Imóvel.PE</h1>
-      <p className="text-gray-600 text-sm mb-6">CRM Imobiliário Profissional</p>
+    <div className="w-full max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+      <h1 className="text-2xl font-bold mb-2 text-white">Meu Imóvel.PE</h1>
+      <p className="text-gray-400 text-sm mb-6">CRM Imobiliário Profissional</p>
 
       {error && (
-        <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded text-sm">
+        <div className="mb-4 p-4 bg-red-900 border border-red-600 text-red-100 rounded text-sm">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
+          <label className="block text-sm font-medium mb-1 text-gray-300">Email</label>
           <input
             {...register('email', { required: 'Email é obrigatório' })}
             type="email"
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
             placeholder="seu@email.com"
             disabled={isLoading}
           />
-          {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+          {errors.email && <span className="text-red-400 text-sm">{errors.email.message}</span>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Senha</label>
+          <label className="block text-sm font-medium mb-1 text-gray-300">Senha</label>
           <input
             {...register('password', { required: 'Senha é obrigatória' })}
             type="password"
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-600 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
             placeholder="Sua senha"
             disabled={isLoading}
           />
-          {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+          {errors.password && <span className="text-red-400 text-sm">{errors.password.message}</span>}
         </div>
 
         <button

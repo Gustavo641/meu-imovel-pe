@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'media',
   theme: {
     extend: {
       colors: {
@@ -14,6 +15,10 @@ export default {
           cta: '#F97316',
           success: '#10B981',
         },
+      },
+      backgroundColor: {
+        'dark': '#0F172A',
+        'dark-secondary': '#1E293B',
       },
     },
   },

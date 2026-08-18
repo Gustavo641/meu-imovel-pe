@@ -12,12 +12,32 @@
   --color-violet-primary: #955BFE;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0F172A;
+    --color-text-primary: #E2E8F0;
+    --color-brand-primary: #0284C7;
+    --color-action-cta: #F97316;
+    --color-success: #10B981;
+  }
+}
+
 * {
   @apply transition-colors;
 }
 
+html {
+  @apply bg-gray-900 text-white;
+}
+
 body {
-  @apply bg-gray-50 text-gray-900;
+  @apply bg-gray-900 text-gray-100;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
 }
 
 /* Custom components */
