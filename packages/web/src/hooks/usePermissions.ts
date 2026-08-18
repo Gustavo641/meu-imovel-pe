@@ -71,7 +71,7 @@ export const usePermissionStore = create<PermissionStore>((set, get) => ({
         error: String(error),
         loading: false
       });
-      console.error('Erro ao carregar permissões:', error);
+      // Erro ao carregar permissões
     }
   },
 

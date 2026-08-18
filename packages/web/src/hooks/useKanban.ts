@@ -11,7 +11,7 @@ export function useKanban() {
         status: newStatus,
       });
     } catch (error) {
-      console.error('Erro ao mover lead:', error);
+      // Erro ao mover lead
       throw error;
     }
   };

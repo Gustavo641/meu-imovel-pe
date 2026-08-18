@@ -16,7 +16,7 @@ const TIPOS = [
 ];
 
 export function DocumentoForm({ onSubmit, isLoading }: DocumentoFormProps) {
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<any>({
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<CreateDocumentoDTO>({
     defaultValues: {
       nome: '',
       tipo: 'contrato',

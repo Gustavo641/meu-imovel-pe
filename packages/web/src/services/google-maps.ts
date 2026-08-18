@@ -186,7 +186,7 @@ export class GoogleMapsService {
         },
       }));
     } catch (error) {
-      console.error('Erro ao buscar lugares próximos:', error);
+      // Erro silencioso
       return [];
     }
   }
@@ -228,7 +228,7 @@ export class GoogleMapsService {
         reviewCount: place.review_count,
       };
     } catch (error) {
-      console.error('Erro ao obter detalhes do lugar:', error);
+      // Erro silencioso
       throw error;
     }
   }
@@ -263,7 +263,7 @@ export class GoogleMapsService {
 
       return description.trim();
     } catch (error) {
-      console.error('Erro ao gerar descrição de vizinhança:', error);
+      // Erro silencioso
       return '';
     }
   }
@@ -274,7 +274,7 @@ export function useGoogleMaps() {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 
   if (!apiKey) {
-    console.warn('Google Maps API Key não configurada');
+    // API Key não configurada
     return null;
   }
 

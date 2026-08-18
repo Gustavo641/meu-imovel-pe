@@ -51,7 +51,7 @@ export class MetaWhatsAppAPI {
   }
 
   async sendMessage(message: WhatsAppMessage): Promise<string> {
-    const payload: any = {
+    const payload: Record<string, unknown> = {
       messaging_product: 'whatsapp',
       to: message.to,
       type: 'text',
@@ -80,7 +80,7 @@ export class MetaWhatsAppAPI {
       const data = await response.json() as { messages: Array<{ id: string }> };
       return data.messages[0].id;
     } catch (error) {
-      console.error('Erro ao enviar mensagem WhatsApp:', error);
+      // Erro silencioso
       throw error;
     }
   }
@@ -103,7 +103,7 @@ export class MetaWhatsAppAPI {
       const data = await response.json() as { data: WhatsAppTemplate[] };
       return data.data;
     } catch (error) {
-      console.error('Erro ao buscar templates:', error);
+      // Erro silencioso
       throw error;
     }
   }
@@ -145,7 +145,7 @@ export class MetaWhatsAppAPI {
       const data = await response.json() as { messages: Array<{ id: string }> };
       return data.messages[0].id;
     } catch (error) {
-      console.error('Erro ao enviar template:', error);
+      // Erro silencioso
       throw error;
     }
   }

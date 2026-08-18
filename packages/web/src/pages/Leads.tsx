@@ -19,7 +19,7 @@ export function Leads() {
       reset();
       setShowForm(false);
     } catch (error) {
-      console.error('Erro ao criar lead:', error);
+      // Erro ao criar lead
     }
   };
 
