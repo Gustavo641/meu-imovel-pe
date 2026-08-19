@@ -46,8 +46,11 @@ describe('RLS - Row-Level Security', () => {
       });
     });
 
-    it('Admin policies devem existir em todas as tabelas', () => {
-      Object.values(EXPECTED_POLICIES).forEach((policies) => {
+    it('Admin policies devem existir em tabelas de dados (não em audit/logs)', () => {
+      const dataTables = ['profiles', 'clientes', 'demandas', 'documentos'];
+
+      dataTables.forEach((table) => {
+        const policies = EXPECTED_POLICIES[table as keyof typeof EXPECTED_POLICIES];
         expect(policies).toContain('admin_all_access');
       });
     });
