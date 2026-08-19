@@ -71,7 +71,7 @@ function AppContent() {
       <header className="bg-surface border-b border-sidebar-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-display font-bold bg-gradient-primary bg-clip-text text-transparent">
-            LUNA CRM
+            CRM DO CORRETOR
           </h1>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground">{user.email}</span>

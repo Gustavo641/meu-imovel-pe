@@ -1,4 +1,4 @@
-# 🚀 DEPLOYMENT - LUNA CRM EM PRODUÇÃO
+# 🚀 DEPLOYMENT - CRM DO CORRETOR EM PRODUÇÃO
 
 **Data**: 2026-08-18 22:50 UTC-3
 **Status**: ✅ PUSHED TO PRODUCTION
@@ -278,7 +278,7 @@ Após live, verificar:
 
 ## 🎉 Summary
 
-✅ **LUNA CRM está agora em PRODUÇÃO!**
+✅ **CRM DO CORRETOR está agora em PRODUÇÃO!**
 
 ### O que foi feito:
 - 41 testes passando
@@ -306,4 +306,4 @@ Após live, verificar:
 **Branch**: main  
 **Commits**: 8 commits, ~7,500 linhas
 
-## 🎊 PARABÉNS! LUNA CRM ESTÁ VIVO! 🎊
+## 🎊 PARABÉNS! CRM DO CORRETOR ESTÁ VIVO! 🎊

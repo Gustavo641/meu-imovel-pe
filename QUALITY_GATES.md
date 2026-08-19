@@ -1,4 +1,4 @@
-# LUNA CRM - Quality Gates & Release Checklist
+# CRM DO CORRETOR - Quality Gates & Release Checklist
 
 ## Overview
 

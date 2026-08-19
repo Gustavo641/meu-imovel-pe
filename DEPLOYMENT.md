@@ -1,8 +1,8 @@
-# LUNA CRM - Deployment Guide
+# CRM DO CORRETOR - Deployment Guide
 
 ## Overview
 
-This guide covers deploying the LUNA CRM application to Vercel with proper environment configuration, testing, and monitoring.
+This guide covers deploying the CRM DO CORRETOR application to Vercel with proper environment configuration, testing, and monitoring.
 
 ---
 
@@ -61,7 +61,7 @@ NODE_ENV=production
 
 **Verify in Vercel Dashboard**:
 1. Go to https://vercel.com/dashboard
-2. Select the LUNA CRM project
+2. Select the CRM DO CORRETOR project
 3. Settings → Environment Variables
 4. Confirm all variables are set
 
@@ -134,7 +134,7 @@ vercel --env production
 
 **Via Vercel Dashboard**:
 1. Go to https://vercel.com/dashboard
-2. Select LUNA CRM project
+2. Select CRM DO CORRETOR project
 3. Deployments tab
 4. Click "Redeploy" next to desired commit
 
@@ -237,7 +237,7 @@ git push origin main
 ### Real-time Monitoring
 
 **Vercel Analytics Dashboard**:
-1. Go to Vercel Dashboard → LUNA CRM project
+1. Go to Vercel Dashboard → CRM DO CORRETOR project
 2. Analytics tab shows:
    - Page views
    - Top pages

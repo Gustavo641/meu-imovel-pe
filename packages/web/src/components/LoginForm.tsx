@@ -37,7 +37,7 @@ export function LoginForm({ onSwitchToSignup, onSwitchToForgotPassword }: LoginF
   return (
     <div className="w-full max-w-md mx-auto p-8 bg-card rounded-2xl shadow-elevated border border-border">
       <h1 className="text-3xl font-display font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">
-        LUNA CRM
+        CRM DO CORRETOR
       </h1>
       <p className="text-muted-foreground text-sm mb-6">Gestão de Vendas Profissional</p>
 

@@ -1,8 +1,8 @@
-# Testing Guide - LUNA CRM Web
+# Testing Guide - CRM DO CORRETOR Web
 
 ## Overview
 
-This guide covers unit tests, integration tests, and E2E tests for the LUNA CRM web application.
+This guide covers unit tests, integration tests, and E2E tests for the CRM DO CORRETOR web application.
 
 ---
 

@@ -1,4 +1,4 @@
-# 🎉 LUNA CRM - RESUMO FINAL
+# 🎉 CRM DO CORRETOR - RESUMO FINAL
 
 **Data**: 18 de Agosto de 2026  
 **Status**: ✅ DEPLOYADO EM PRODUÇÃO  

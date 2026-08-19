@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Authentication Flow', () => {
   test('should load login page', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('text=LUNA CRM')).toBeVisible();
+    await expect(page.locator('text=CRM DO CORRETOR')).toBeVisible();
     await expect(page.locator('button:has-text("Entrar")')).toBeVisible();
   });
 

@@ -213,7 +213,7 @@ This will:
 
 ## 🎉 Summary
 
-**LUNA CRM is ready for production!**
+**CRM DO CORRETOR is ready for production!**
 
 - 🧪 41 unit tests passing
 - 🏗️ Production build working

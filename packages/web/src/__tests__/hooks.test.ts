@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 /**
- * Hook tests for LUNA CRM
+ * Hook tests for CRM DO CORRETOR
  * Tests for custom React hooks that manage lead/agenda data
  */
 

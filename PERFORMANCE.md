@@ -1,4 +1,4 @@
-# Performance & Quality Checklist - LUNA CRM
+# Performance & Quality Checklist - CRM DO CORRETOR
 
 ## Última Atualização: 2026-08-18
 
@@ -73,7 +73,7 @@ index.css: 25.85 kB (gzip: 5.36 kB)
 
 ## ✅ SEO & Meta Tags
 
-- [x] Meta title: "LUNA CRM - Gestão Imobiliária"
+- [x] Meta title: "CRM DO CORRETOR - Gestão Imobiliária"
 - [x] Meta description configured
 - [x] Open Graph tags
 - [x] Canonical URLs

@@ -11,7 +11,7 @@ test.describe('Complete User Journey', () => {
     await page.goto('/');
 
     // Expect login page
-    await expect(page.locator('text=LUNA CRM')).toBeVisible();
+    await expect(page.locator('text=CRM DO CORRETOR')).toBeVisible();
 
     // Note: In real scenario, would test signup but rate limiting affects this
     // For now, tests are structure-ready for authenticated flows
@@ -86,7 +86,7 @@ test.describe('Responsive Design', () => {
     await page.goto('/');
 
     // Verify layout is responsive
-    await expect(page.locator('text=LUNA CRM')).toBeVisible();
+    await expect(page.locator('text=CRM DO CORRETOR')).toBeVisible();
 
     // Kanban columns should be stacked or horizontal scroll
     // Navigation should be hamburger menu or stacked
@@ -102,7 +102,7 @@ test.describe('Responsive Design', () => {
     await page.goto('/');
 
     // Verify layout is responsive
-    await expect(page.locator('text=LUNA CRM')).toBeVisible();
+    await expect(page.locator('text=CRM DO CORRETOR')).toBeVisible();
 
     // Two-column layout should work
     // Sidebar should be visible or easily accessible
@@ -117,7 +117,7 @@ test.describe('Responsive Design', () => {
     await page.goto('/');
 
     // Verify full layout
-    await expect(page.locator('text=LUNA CRM')).toBeVisible();
+    await expect(page.locator('text=CRM DO CORRETOR')).toBeVisible();
 
     // All columns should be visible
     // Navigation should be expanded

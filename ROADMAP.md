@@ -1,4 +1,4 @@
-# LUNA CRM - Development Roadmap
+# CRM DO CORRETOR - Development Roadmap
 
 ## 📍 Current Status: FASE 6 - Testing & Polish (In Progress)
 
@@ -474,7 +474,7 @@ Live on https://luna-crm.vercel.app
 
 ## 🎯 Success Criteria
 
-The LUNA CRM is considered production-ready when:
+The CRM DO CORRETOR is considered production-ready when:
 
 ✅ **Quality**
 - All automated tests passing

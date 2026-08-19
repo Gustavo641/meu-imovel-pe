@@ -72,7 +72,7 @@ export function SignupForm({ onSignupSuccess, onSwitchToLogin }: SignupFormProps
       <h1 className="text-3xl font-display font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">
         Criar Conta
       </h1>
-      <p className="text-muted-foreground text-sm mb-6">Junte-se a LUNA CRM</p>
+      <p className="text-muted-foreground text-sm mb-6">Junte-se ao CRM DO CORRETOR</p>
 
       {error && (
         <div className="mb-4 p-4 bg-destructive bg-opacity-10 border border-destructive rounded-lg text-destructive text-sm">
