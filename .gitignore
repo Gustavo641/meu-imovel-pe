@@ -49,3 +49,6 @@ dist
 dist/
 out/
 node_modules/
+
+.vercel
+.env*
