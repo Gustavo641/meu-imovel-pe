@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useCreateLead } from '../hooks/useLeads';
 import { LeadsList } from '../components/LeadsList';
 import { LEAD_ORIGINS, PROPERTY_TYPES, INVESTMENT_RANGES } from '@meu-imovel-pe/shared';
-import type { Lead, LeadStatus, LeadOrigin } from '@meu-imovel-pe/shared';
+import type { Lead, LeadStatus } from '@meu-imovel-pe/shared';
 
 type LeadFormData = Omit<Lead, 'id' | 'created_at' | 'updated_at'>;
 

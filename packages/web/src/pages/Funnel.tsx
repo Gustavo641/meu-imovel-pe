@@ -61,11 +61,11 @@ export function Funnel() {
                       className="inline-block px-3 py-1 rounded-md text-xs font-semibold text-white"
                       style={{
                         backgroundColor:
-                          LEAD_STATUS_CONFIG[lead.status as any]?.color ||
+                          LEAD_STATUS_CONFIG[lead.status as keyof typeof LEAD_STATUS_CONFIG]?.color ||
                           '#6B7280',
                       }}
                     >
-                      {LEAD_STATUS_CONFIG[lead.status as any]?.label || lead.status}
+                      {LEAD_STATUS_CONFIG[lead.status as keyof typeof LEAD_STATUS_CONFIG]?.label || lead.status}
                     </span>
                   </div>
                 </div>
